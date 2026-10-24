@@ -1,105 +1,151 @@
 #include <iostream>
 using namespace std;
 
-class Node
+class node
 {
 public:
     int data;
-    Node* next;
+    node *next;
 
-    Node(int value)
+    node(int x)
     {
-        data = value;
+        data = x;
         next = NULL;
     }
 };
 
-class Queue
+class queue
 {
-    Node* front;
-    Node* rear;
+private:
+    node *front;
+    node *rear;
 
 public:
-    Queue()
+
+    // Constructor
+    queue()
     {
         front = rear = NULL;
     }
 
-    void enqueue(int value)
-    {
-        Node* newNode = new Node(value);
-
-        if (rear == NULL)
-        {
-            front = rear = newNode;
-        }
-        else
-        {
-            rear->next = newNode;
-            rear = newNode;
-        }
-
-        cout << "\nInserted: " << value;
-    }
-
-    void dequeue()
+    // Check whether queue is empty
+    int empty(void)
     {
         if (front == NULL)
         {
-            cout << "\nQueue is Empty";
-            return;
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    // Return front element
+    int peek(void)
+    {
+        if (empty())
+        {
+            cout << "\nQueue is empty";
+            return -1;
         }
 
-        Node* temp = front;
-        cout << "\nDeleted: " << front->data;
+        return front->data;
+    }
+
+    // Insert element into queue
+    void enqueue(int x)
+    {
+        node *p = new node(x);
+
+        if (front == NULL)
+        {
+            front = p;
+            rear = p;
+        }
+        else
+        {
+            rear->next = p;
+            rear = p;
+        }
+    }
+
+    // Delete element from queue
+    int dequeue(void)
+    {
+        if (empty())
+        {
+            cout << "\nQueue is empty";
+            return -1;
+        }
+
+        int x = front->data;
+        node *p = front;
 
         front = front->next;
 
         if (front == NULL)
-            rear = NULL;
-
-        delete temp;
-    }
-
-    void display()
-    {
-        if (front == NULL)
         {
-            cout << "\nQueue is Empty";
-            return;
+            rear = NULL;
         }
 
-        Node* temp = front;
+        delete p;
+        return x;
+    }
+
+    // Display queue elements
+    void display(void)
+    {
+        node *q = front;
+
         cout << "\nQueue elements: ";
 
-        while (temp != NULL)
+        while (q != NULL)
         {
-            cout << temp->data << " ";
-            temp = temp->next;
+            cout << "\t" << q->data;
+            q = q->next;
         }
     }
 };
 
 int main()
 {
-    Queue q;
+    int x;
 
-    q.enqueue(10);
-    q.enqueue(20);
-    q.enqueue(30);
+    queue q;
+
+    q.enqueue(27);
+    q.enqueue(34);
+    q.enqueue(42);
+    q.enqueue(58);
+    q.enqueue(65);
+    q.enqueue(70);
 
     q.display();
-    q.dequeue();
+
+    if (!q.empty())
+    {
+        x = q.dequeue();
+        cout << "\nRemoved: " << x;
+    }
+
     q.display();
+
+    x = q.peek();
+    cout << "\nFront element is: " << x;
 
     return 0;
 }
+/*
+Microsoft Windows [Version 10.0.26200.8875]
+(c) Microsoft Corporation. All rights reserved.
 
-/*d:\pratikshagadekar204>cd "d:\pratikshagadekar204\" && g++ queueusingarrary.cpp -o queueusingarrary && "d:\pratikshagadekar204\"queueusingarrary
+D:\pratikshagadekar204>cd "d:\pratikshagadekar204\" && g++ queueusinglinkedlist.cpp -o queueusinglinkedlist && "d:\pratikshagadekar204\"queueusinglinkedlist
 
-Queue elements: 25      57      25      82      99
-Removed: 25
-Queue elements: 57      25      82      99
-Front element is: 57
+Queue elements:         27      34      42      58      65      70
+Removed: 27
+Queue elements:         34      42      58      65      70
+Front element is: 34
 d:\pratikshagadekar204>
 */
+    
