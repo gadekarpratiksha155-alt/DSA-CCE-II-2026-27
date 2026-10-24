@@ -94,3 +94,12 @@ int main()
 
     return 0;
 }
+
+/*d:\pratikshagadekar204>cd "d:\pratikshagadekar204\" && g++ queueusingarrary.cpp -o queueusingarrary && "d:\pratikshagadekar204\"queueusingarrary
+
+Queue elements: 25      57      25      82      99
+Removed: 25
+Queue elements: 57      25      82      99
+Front element is: 57
+d:\pratikshagadekar204>
+*/
