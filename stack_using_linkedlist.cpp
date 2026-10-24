@@ -80,3 +80,24 @@ int main()
 
     return 0;
 }
+
+
+D:\pratikshagadekar204>cd "d:\pratikshagadekar204\" && g++ Stackusinglinkelist.cpp -o Stackusinglinkelist && "d:\pratikshagadekar204\"Stackusinglinkelist
+
+Stack elements:
+220
+100
+578
+333
+810
+990
+
+Removed: 220
+Stack elements:
+100
+578
+333
+810
+990
+
+Top element is: 100
