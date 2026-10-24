@@ -1,93 +1,157 @@
 #include <iostream>
 using namespace std;
 
-#define MAX 5
+const int MAX = 5;
 
-class Queue
+class queue
 {
-    int q[MAX];
-    int front, rear;
+private:
+    int a[MAX];
+    int front;
+    int rear;
 
 public:
-    Queue()
+
+    // Constructor
+    queue()
     {
         front = -1;
         rear = -1;
     }
 
-    void enqueue(int x)
+    // Check whether queue is empty
+    int empty(void)
+    {
+        if (front == -1 && rear == -1)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    // Check whether queue is full
+    int full(void)
     {
         if (rear == MAX - 1)
         {
-            cout << "\nQueue is Full";
-            return;
+            return 1;
         }
-
-        if (front == -1)
-            front = 0;
-
-        q[++rear] = x;
-        cout << "\nInserted: " << x;
+        else
+        {
+            return 0;
+        }
     }
 
-    void dequeue()
+    // Insert element into queue
+    void enqueue(int x)
     {
-        if (front == -1 || front > rear)
+        if (full())
         {
-            cout << "\nQueue is Empty";
+            cout << "\nQueue is full";
             return;
         }
 
-        cout << "\nDeleted: " << q[front];
-        front++;
+        if (front == -1 && rear == -1)
+        {
+            front++;
+            rear++;
+        }
+        else
+        {
+            rear++;
+        }
+
+        a[rear] = x;
     }
 
-    void display()
+    // Remove element from queue
+    int dequeue(void)
     {
-        if (front == -1 || front > rear)
+        if (empty())
         {
-            cout << "\nQueue is Empty";
+            cout << "\nQueue is empty";
+            return -1;
+        }
+
+        int x = a[front];
+
+        if (front == rear)
+        {
+            front = -1;
+            rear = -1;
+        }
+        else
+        {
+            front++;
+        }
+
+        return x;
+    }
+
+    // Return front element
+    int peek(void)
+    {
+        if (empty())
+        {
+            cout << "\nQueue is empty";
+            return -1;
+        }
+
+        return a[front];
+    }
+
+    // Display queue elements
+    void display(void)
+    {
+        if (empty())
+        {
+            cout << "\nQueue is empty";
             return;
         }
 
-        cout << "\nQueue elements: ";
+        cout << "\nQueue elements:";
+
         for (int i = front; i <= rear; i++)
-            cout << q[i] << " ";
+        {
+            cout << "\t" << a[i];
+        }
     }
 };
 
 int main()
 {
-    Queue q;
+    int x;
+    queue q;
 
-    q.enqueue(10);
-    q.enqueue(20);
-    q.enqueue(30);
-    q.enqueue(40);
+    q.enqueue(25);
+    q.enqueue(57);
+    q.enqueue(25);
+    q.enqueue(82);
+    q.enqueue(99);
 
     q.display();
-    q.dequeue();
+
+    if (!q.empty())
+    {
+        x = q.dequeue();
+        cout << "\nRemoved: " << x;
+    }
+
     q.display();
+
+    x = q.peek();
+    cout << "\nFront element is: " << x;
 
     return 0;
 }
+/*d:\pratikshagadekar204>cd "d:\pratikshagadekar204\" && g++ queueusingarrary.cpp -o queueusingarrary && "d:\pratikshagadekar204\"queueusingarrary
 
-D:\pratikshagadekar204>cd "d:\pratikshagadekar204\" && g++ Stackusinglinkelist.cpp -o Stackusinglinkelist && "d:\pratikshagadekar204\"Stackusinglinkelist
-
-Stack elements:
-220
-100
-578
-333
-810
-990
-
-Removed: 220
-Stack elements:
-100
-578
-333
-810
-990
-
-Top element is: 100
+Queue elements: 25      57      25      82      99
+Removed: 25
+Queue elements: 57      25      82      99
+Front element is: 57
+d:\pratikshagadekar204>
+*/
