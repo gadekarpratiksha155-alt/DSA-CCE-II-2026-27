@@ -78,6 +78,9 @@ int main()
         cout << endl << "Removed: " << x;
     }
 
+
+    
+
     cout << endl << "Stack after pop:";
     s.display();
 
@@ -90,3 +93,22 @@ int main()
     return 0;
 }
 
+D:\pratikshagadekar204>cd "d:\pratikshagadekar204\" && g++ stackusingarray.cpp -o stackusingarray && "d:\pratikshagadekar204\"stackusingarray
+
+Stack elements:
+92
+87
+56
+34
+12
+
+Popped element: 92
+
+Stack after pop:
+Stack elements:
+87
+56
+34
+12
+
+Top element is: 87
